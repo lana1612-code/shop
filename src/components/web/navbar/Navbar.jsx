@@ -1,7 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Navbar() {
+export default function Navbar({user,setUser}) {
+  const navigate = useNavigate();
+const logout=()=>{
+  localStorage.removeItem('token');
+  setUser(null);
+  navigate('/login');
+  toast.success('By ,Log out success ', {
+    position: "bottom-center",
+    autoClose: false,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
+}
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container">
@@ -13,21 +31,26 @@ export default function Navbar() {
       <ul className="navbar-nav m-auto mb-2 mb-lg-0">
        
         <li className="nav-item">
-          <a className="nav-link" href="#">Home</a>
+          <Link className="nav-link" to='/'>Home</Link>
         </li>
 
 
         <li className="nav-item">
-          <a className="nav-link" href="#">Categories</a>
+          <Link className="nav-link" to='/catogory' >Categories</Link>
         </li>
 
 
         <li className="nav-item">
-        <a className="nav-link" href="#">Products</a>
+        <Link className="nav-link" >Products</Link>
       </li>
+
+      {user&&<li className="nav-item">
+        <a className="nav-link" href="#">Card</a>
+      </li>}
      
      
       </ul>
+      {!user?
       <ul className="navbar-nav">
       <li className="nav-item dropdown">
       <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,10 +59,24 @@ export default function Navbar() {
       <ul className="dropdown-menu ">
         <li><Link className="dropdown-item" to="/register">register</Link></li>
         <li><hr className="dropdown-divider" /></li>
-        <li><a className="dropdown-item" href="#">login</a></li>
+        <li><Link className="dropdown-item" to="/login">login</Link></li>
       </ul>
     </li>
       </ul>
+      :
+      <ul className="navbar-nav">
+      <li className="nav-item dropdown">
+      <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown
+      </a>
+      <ul className="dropdown-menu ">
+        <li><Link className="dropdown-item" to="#">Profile</Link></li>
+        <li><hr className="dropdown-divider" /></li>
+        <li><Link className="dropdown-item" onClick={logout} >Logout</Link></li>
+      </ul>
+    </li>
+      </ul>}
+      
    
     </div>
   </div>

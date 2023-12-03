@@ -7,3 +7,10 @@ export const validationSchema = yup.object(
 
     }
    );
+   export const validationSchemaLogin = yup.object(
+      {
+         email:yup.string().required("the email is requierd").email(),
+         password:yup.string().required("the password is requierd").min(5,"the least number is 5"),
+  
+      }
+     );

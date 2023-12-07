@@ -14,3 +14,8 @@ export const validationSchema = yup.object(
   
       }
      );
+     export const validationSchemaForget = yup.object(
+      {
+         email:yup.string().required("the email is requierd").email(),  
+      }
+     );

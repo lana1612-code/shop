@@ -7,25 +7,24 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login({saveCurrentUser}) {
+export default function ForgetPassword() {
     const navigate = useNavigate();
    const initialValues={
   
       email:'',
       password:'',
-    
+      code:''
      }
 
      const onSubmit= async users=>{
       console.log(users);
    
-      const {data} = await axios.post(`https://ecommerce-node4.vercel.app/auth/signin`,users);
+      const {data} = await axios.patch(`https://ecommerce-node4.vercel.app/auth/forgotPassword`,users);
+      console.log(data);
       if(data.message='success'){
-        localStorage.setItem("userToken", data.token);
        
-        saveCurrentUser();
-        navigate('/');
-         toast.success('Login success', {
+        navigate('/login');
+         toast.success('Update password success', {
             position: "bottom-center",
             autoClose: false,
             hideProgressBar: false,
@@ -37,7 +36,7 @@ export default function Login({saveCurrentUser}) {
             });
       }
       
-      console.log(data);
+    
      } 
 
     const formik= useFormik(
@@ -64,6 +63,14 @@ export default function Login({saveCurrentUser}) {
         value:formik.values.password,
         
 
+     },,                 
+     {
+        id:'code',
+        name:'code',
+        type:'text',
+        title:'user code',
+        
+
      }
     ];
 
@@ -85,19 +92,13 @@ export default function Login({saveCurrentUser}) {
   return (
     <>
       <div className='container text-center border rounded-5 mt-5 p-5 border-3 border-warning'>
-        <h1 className='mb-3 '>Login Page</h1>
+        <h1 className='mb-3 '>handle new password</h1>
         <form onSubmit={formik.handleSubmit}>
          {inputs}
-         <div className='d-flex justify-content-between'>
-         <p></p>
+       
          <button type='submit' className='btn btn-warning rounded-4 ' disabled={!formik.isValid} >
-           Login
-           
+           handle
            </button>
-          <Link to={'/auth/sendcode'}>
-           <p >forget password ? </p>
-          </Link>
-           </div>
          </form>
         </div>
         

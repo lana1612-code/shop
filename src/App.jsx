@@ -12,6 +12,10 @@ import {createBrowserRouter} from "react-router-dom";
 import Login from './components/web/login/Login.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
+import CatogoryDetail from './components/web/catogories/CatogoryDetail.jsx';
+import Product from './components/web/product/Product.jsx';
+import EmailForgetPassword from './components/web/forgetpassword/EmailForgetPassword.jsx';
+import ForgetPassword from './components/web/forgetpassword/ForgetPassword.jsx';
     
 export default function App() {
   const [user,setUser] = useState(null);
@@ -27,8 +31,7 @@ export default function App() {
      if (localStorage.getItem("userToken")){
       saveCurrentUser();
      }
-    },[]
-   );
+    },[]  );
 
  const Route= createBrowserRouter([
     {
@@ -48,9 +51,22 @@ export default function App() {
         path:'login',
         element:<Login saveCurrentUser={saveCurrentUser}/>
       },{
+        path:'products/category/:catogoryID',
+        element:<CatogoryDetail />
+      },{
+        path:'products/:productsID',
+        element:<Product />
+      },{
+        path:'auth/sendcode',
+        element:<EmailForgetPassword />
+      },{
+        path:'auth/forgotPassword',
+        element:<ForgetPassword />
+      },{
         path:'*',
         element:<div>not found web</div>
       }
+      
     ]
     },
     {

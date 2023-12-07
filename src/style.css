@@ -1,0 +1,18 @@
+img{
+    aspect-ratio: 500/413;
+    width:100%;
+}
+.swiper-pagination-bullet{
+    background-color: rgb(24, 23, 10)
+  
+}
+.swiper-button-prev ,.swiper-button-next {
+    border-radius: 100%;
+    background-color: rgb(240, 224, 11,.5);
+    color:black;
+     width:50px;
+     height: 50px;
+}
+.swiper-button-prev:after ,.swiper-button-next:after {
+   font-size: 24px;
+}

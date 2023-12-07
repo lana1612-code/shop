@@ -1,0 +1,50 @@
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import {useQuery} from 'react-query';
+import axios from 'axios';
+
+export default function Product() {
+     const {productsID} = useParams();
+
+     const getProductDeatail = async()=>{
+        const {data} = await axios.get(`${import.meta.env.VITE_IP_URL}/products/${productsID}`);
+        console.log(data);
+        return data.product;
+     }
+
+     const {data,isLoading} = useQuery('get_Product_Detail',getProductDeatail);
+   
+     if(isLoading){
+        return <h2> Loading </h2>;
+     }
+  return (
+    
+    <>
+    <div className="container text-center mt-5">
+        <div className='row text-center mt-5 border p-5'>
+            <div className='col-lg-6'>
+           <div className='row text-center' >
+        {data?.subImages.map(
+            (img)=>
+            <div className=' col-lg-4 '>
+              <div className=' border border-primary mb-3'>
+              <img src={img.secure_url} className='img-fluid w-100' />
+              </div>
+            </div>
+        )}
+        
+          </div>   
+    </div>
+    
+    <div className='col-lg-6'>
+        <h5> name product : {data.name}</h5>
+        <p>price : {data.price} </p>
+        
+      
+    </div>
+
+    </div>
+    </div>
+    </>
+  )
+}

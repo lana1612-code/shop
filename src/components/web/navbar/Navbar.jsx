@@ -6,9 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Navbar({user,setUser}) {
   const navigate = useNavigate();
 const logout=()=>{
-  localStorage.removeItem('token');
+  localStorage.removeItem('userToken');
   setUser(null);
-  navigate('/login');
+  navigate('/');
   toast.success('By ,Log out success ', {
     position: "bottom-center",
     autoClose: false,
@@ -41,7 +41,7 @@ const logout=()=>{
 
 
         <li className="nav-item">
-        <Link className="nav-link" >Products</Link>
+        <Link className="nav-link" to='/products/:productsID'>Products</Link>
       </li>
 
       {user&&<li className="nav-item">

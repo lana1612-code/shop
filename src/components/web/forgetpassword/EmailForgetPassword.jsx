@@ -1,31 +1,23 @@
 import React from 'react'
 import Inputs from '../../shared/Inputs';
 import {  useFormik } from 'formik';
-import{validationSchemaLogin} from './../../shared/Valid.jsx';
+import{validationSchemaForget} from './../../shared/Valid.jsx';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login({saveCurrentUser}) {
+export default function EmailForgetPassword() {
     const navigate = useNavigate();
-   const initialValues={
-  
+    const initialValues={
       email:'',
-      password:'',
-    
      }
 
-     const onSubmit= async users=>{
-      console.log(users);
-   
-      const {data} = await axios.post(`https://ecommerce-node4.vercel.app/auth/signin`,users);
-      if(data.message='success'){
-        localStorage.setItem("userToken", data.token);
-       
-        saveCurrentUser();
-        navigate('/');
-         toast.success('Login success', {
+     const onSubmit=  (email)=>{
+       axios.patch('https://ecommerce-node4.vercel.app/auth/sendcode',email);
+      if(true){
+        navigate('/auth/forgotPassword');
+         toast.success('send code successfully , sheck your email', {
             position: "bottom-center",
             autoClose: false,
             hideProgressBar: false,
@@ -36,15 +28,13 @@ export default function Login({saveCurrentUser}) {
             theme: "dark",
             });
       }
-      
-      console.log(data);
      } 
 
     const formik= useFormik(
      { 
       initialValues,
      onSubmit,
-     validationSchema :validationSchemaLogin,
+     validationSchema :validationSchemaForget,
     })
 
     const input = [                
@@ -54,15 +44,6 @@ export default function Login({saveCurrentUser}) {
         type:'name',
         title:'user email',
         value:formik.values.email,
-
-     },                 
-     {
-        id:'password',
-        name:'password',
-        type:'password',
-        title:'user password',
-        value:formik.values.password,
-        
 
      }
     ];
@@ -85,19 +66,14 @@ export default function Login({saveCurrentUser}) {
   return (
     <>
       <div className='container text-center border rounded-5 mt-5 p-5 border-3 border-warning'>
-        <h1 className='mb-3 '>Login Page</h1>
+        <h1 className='mb-3 '>Forget Password Page</h1>
         <form onSubmit={formik.handleSubmit}>
          {inputs}
-         <div className='d-flex justify-content-between'>
-         <p></p>
+         
          <button type='submit' className='btn btn-warning rounded-4 ' disabled={!formik.isValid} >
-           Login
+           send code
            
            </button>
-          <Link to={'/auth/sendcode'}>
-           <p >forget password ? </p>
-          </Link>
-           </div>
          </form>
         </div>
         

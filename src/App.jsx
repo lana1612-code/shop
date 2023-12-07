@@ -16,6 +16,8 @@ import CatogoryDetail from './components/web/catogories/CatogoryDetail.jsx';
 import Product from './components/web/product/Product.jsx';
 import EmailForgetPassword from './components/web/forgetpassword/EmailForgetPassword.jsx';
 import ForgetPassword from './components/web/forgetpassword/ForgetPassword.jsx';
+import { CartContextProvider } from './components/context/Context.jsx';
+import Cart from './components/web/cart/Cart.jsx';
     
 export default function App() {
   const [user,setUser] = useState(null);
@@ -47,6 +49,9 @@ export default function App() {
       },{
         path:'register',
         element:<Register/>
+      },{
+        path:'cart',
+        element:<Cart/>
       },{
         path:'login',
         element:<Login saveCurrentUser={saveCurrentUser}/>
@@ -87,7 +92,9 @@ export default function App() {
     ]);//containe array of object
 
   return (
+    <CartContextProvider>
     <RouterProvider router={Route} />
+    </CartContextProvider>
 
   )
 }

@@ -14,7 +14,7 @@ export default function Catogory() {
     
    
     const getCatogory = async ()=>{
-        const {data} = await axios.get(`${import.meta.env.VITE_IP_URL}/categories`)
+        const {data} = await axios.get(`${import.meta.env.VITE_IP_URL}/categories/active?limit=20`)
         
          return data.categories;
       }
@@ -40,7 +40,7 @@ console.log(data);
        loop={true}
        autoplay={
         {
-          delay:2000,
+          delay:1000,
         }
        }
       onSlideChange={() => console.log('slide change')}

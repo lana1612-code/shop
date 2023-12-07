@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import {useQuery} from 'react-query';
 import axios from 'axios';
+import { CartContext } from '../../context/Context';
 
 export default function Product() {
      const {productsID} = useParams();
@@ -13,7 +14,18 @@ export default function Product() {
      }
 
      const {data,isLoading} = useQuery('get_Product_Detail',getProductDeatail);
-   
+     const  {addToCartContext} = useContext(CartContext);
+
+     const addToCart =async(id)=>{
+      const response = await addToCartContext(id);
+      console.log(response);
+
+     }
+
+
+
+
+
      if(isLoading){
         return <h2> Loading </h2>;
      }
@@ -39,7 +51,7 @@ export default function Product() {
     <div className='col-lg-6'>
         <h5> name product : {data.name}</h5>
         <p>price : {data.price} </p>
-        
+        <button class='btn btn-outline-dark' onClick={()=>addToCart(data._id)} >add to cart</button>
       
     </div>
 

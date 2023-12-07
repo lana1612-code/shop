@@ -45,7 +45,7 @@ const logout=()=>{
       </li>
 
       {user&&<li className="nav-item">
-        <a className="nav-link" href="#">Card</a>
+        <Link className="nav-link" to={'/cart'}>Card</Link>
       </li>}
      
      

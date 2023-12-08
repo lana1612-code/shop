@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useState } from 'react';
 import {createContext} from 'react';
 import { toast } from 'react-toastify';
 
@@ -34,6 +35,7 @@ export function CartContextProvider ({children}){
 
 
    }
+   let [count,setCount] = useState(0);
 
   const getCartContext = async ()=>{
     try{
@@ -41,6 +43,9 @@ export function CartContextProvider ({children}){
         const {data} = await axios.get(`${import.meta.env.VITE_IP_URL}/cart`
         ,{headers:{Authorization:`Tariq__${token}`}}
         );
+       
+       setCount(data,count);
+
         return data;
     }
     catch(err){
@@ -62,7 +67,7 @@ export function CartContextProvider ({children}){
   }
 
 
-    return <CartContext.Provider value = {{addToCartContext,getCartContext,removeCartContext}}>
+    return <CartContext.Provider value = {{addToCartContext,getCartContext,removeCartContext,count}}>
     {children}
     </CartContext.Provider>
 }

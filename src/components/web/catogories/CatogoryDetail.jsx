@@ -8,7 +8,7 @@ export default function CatogoryDetail() {
      const {catogoryID} = useParams();
 
      const getCatogoryDeatail = async()=>{
-        const {data} = await axios.get(`${import.meta.env.VITE_IP_URL}/products/category/${catogoryID}`);
+        const {data} = await axios.get(`https://ecommerce-node4.vercel.app/products/category/${catogoryID}`);
         return data.products;
      }
 

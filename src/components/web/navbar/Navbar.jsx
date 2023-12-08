@@ -1,7 +1,9 @@
 import React from 'react'
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CartContext } from '../../context/Context';
 
 export default function Navbar({user,setUser}) {
   const navigate = useNavigate();
@@ -20,6 +22,8 @@ const logout=()=>{
     theme: "dark",
     });
 }
+const {count} = useContext(CartContext);
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container">
@@ -45,7 +49,7 @@ const logout=()=>{
       </li>
 
       {user&&<li className="nav-item">
-        <Link className="nav-link" to={'/cart'}>Card</Link>
+        <Link className="nav-link" to={'/cart'}>Card [{count}]</Link>
       </li>}
      
      

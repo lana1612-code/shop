@@ -14,7 +14,7 @@ export default function Catogory() {
     
    
     const getCatogory = async ()=>{
-        const {data} = await axios.get(`${import.meta.env.VITE_IP_URL}/categories/active?limit=20`)
+        const {data} = await axios.get(`https://ecommerce-node4.vercel.app/categories/active?limit=20`)
         
          return data.categories;
       }

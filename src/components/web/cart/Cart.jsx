@@ -11,15 +11,20 @@ export default function Cart() {
 
     const getCart = async()=>{
         const response = await getCartContext();
+        console.log("response");
+        console.log(response);
         return response;
     }
-    const removeCart = async(id)=>{
-        const res = await removeCartContext(id);
+    const removeCart = async(productId)=>{
+        const res = await removeCartContext(productId);
+        console.log("res");
+        console.log(res);
         return res;
-        }
+    }
 
    const {data,isLoading} = useQuery("getCart",getCart);
-   console.log(data);
+   
+
 
    if(isLoading){
     return <p>pls waite ... </p>
@@ -46,7 +51,7 @@ export default function Cart() {
                 </div>
               </div>
        
-               {data?.products?(data.products.map(
+               {data?.products?(data?.products.map(
                 (product)=>
                 <div className="item">
                 <div className="product-info">

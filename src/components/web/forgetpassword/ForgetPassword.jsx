@@ -26,7 +26,7 @@ export default function ForgetPassword() {
         navigate('/login');
          toast.success('Update password success', {
             position: "bottom-center",
-            autoClose: false,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

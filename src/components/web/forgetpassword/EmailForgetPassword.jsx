@@ -19,7 +19,7 @@ export default function EmailForgetPassword() {
         navigate('/auth/forgotPassword');
          toast.success('send code successfully , sheck your email', {
             position: "bottom-center",
-            autoClose: false,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

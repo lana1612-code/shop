@@ -27,7 +27,7 @@ export default function Login({saveCurrentUser}) {
         navigate('/');
          toast.success('Login success', {
             position: "bottom-center",
-            autoClose: false,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

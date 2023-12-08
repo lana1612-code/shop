@@ -25,7 +25,7 @@ export default function Register() {
       if(data.message='success'){
          toast.success('create acounte success , check your email', {
             position: "bottom-center",
-            autoClose: false,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

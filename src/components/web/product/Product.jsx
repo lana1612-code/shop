@@ -49,7 +49,7 @@ export default function Product() {
     </div>
     
     <div className='col-lg-6'>
-        <h5> name product : {data.name}</h5>
+        <h5> name product : {data.name}</h5>   
         <p>price : {data.price} </p>
         <button class='btn btn-outline-dark' onClick={()=>addToCart(data._id)} >add to cart</button>
       

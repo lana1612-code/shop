@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CartContext } from '../../context/Context';
+import { useQuery } from 'react-query';
 
 export default function Navbar({user,setUser}) {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const logout=()=>{
     });
 }
 const {count} = useContext(CartContext);
+const {getCartContext} =useContext(CartContext);
+
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
